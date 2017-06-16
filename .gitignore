@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# data, config, test scripts and so on
+config.py
+test.py
+*.db
