@@ -104,3 +104,4 @@ ENV/
 config.py
 test.py
 *.db
+.idea/
