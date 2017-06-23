@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FeedbackAssistant</class>
+ <widget class="QMainWindow" name="FeedbackAssistant">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1114</width>
+    <height>932</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>FeedbackAssistant</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/images/icon.png</normalon>
+   </iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="table_hw">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>601</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustToContents</enum>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::ExtendedSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
+    <property name="textElideMode">
+     <enum>Qt::ElideMiddle</enum>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+    <property name="columnCount">
+     <number>1</number>
+    </property>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>true</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Content</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTextBrowser" name="display">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>20</y>
+      <width>371</width>
+      <height>871</height>
+     </rect>
+    </property>
+    <property name="undoRedoEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="table_ipv">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>510</y>
+      <width>601</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="midLineWidth">
+     <number>0</number>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
+    <property name="textElideMode">
+     <enum>Qt::ElideMiddle</enum>
+    </property>
+    <property name="columnCount">
+     <number>1</number>
+    </property>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Content</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTableWidget" name="table_pfm">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>601</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
+    <property name="textElideMode">
+     <enum>Qt::ElideMiddle</enum>
+    </property>
+    <property name="columnCount">
+     <number>1</number>
+    </property>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>true</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Content</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label_homework">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Homework</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_performance">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>250</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Performance</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_improvement">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>480</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Improvement</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_append">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>190</y>
+      <width>75</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Append</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>:/images/imageedit_13_8116585645.png</normalon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>70</width>
+      <height>300</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Alt+A</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_delete">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>700</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Delete a feedback</string>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_redo">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>840</y>
+      <width>61</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Redo</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>:/images/Redo-icon.png</normalon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>31</width>
+      <height>31</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_undo">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>780</y>
+      <width>61</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Undo</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>:/images/Undo.png</normalon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>31</width>
+      <height>31</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_add">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>700</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Add a feedback</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_copy">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>690</y>
+      <width>61</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Copy to clipboard</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>-1</number>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>:/images/copy2.png</normalon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>41</width>
+      <height>41</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_copy">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>750</y>
+      <width>61</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>800</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../../../images/assistant.qrc">:/images/icon.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_append_redo">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>610</y>
+      <width>61</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Undo</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>:/images/1206569942771180767pitr_green_double_arrows_set_1.svg.hi.png</normalon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>35</width>
+      <height>35</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_append_undo">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>550</y>
+      <width>61</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Aharoni</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Undo</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>:/images/1206569967984704715pitr_green_double_arrows_set_4.svg.hi.png</normalon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>35</width>
+      <height>35</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="accessibleName">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../../../images/assistant.qrc"/>
+ </resources>
+ <connections/>
+</ui>
