@@ -13,6 +13,12 @@
     <height>932</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>FeedbackAssistant</string>
   </property>
@@ -20,6 +26,9 @@
    <iconset>
     <normalon>:/images/icon.png</normalon>
    </iconset>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="table_hw">

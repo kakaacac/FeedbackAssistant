@@ -2,26 +2,27 @@
 import sys
 import sqlite3
 import datetime
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox, QDialog, QUndoCommand, QUndoStack
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox, QDialog, QUndoStack, QTabBar
 from PyQt5.QtGui import QGuiApplication
-
+from PyQt5.QtCore import QEvent
 
 from assistant import Ui_FeedbackAssistant
 from add_feedback import Ui_Add
+from customized import DisplayTextChangedCommand, MainWindow
 
 
 DB = r"feedback.db"
 
-class Assistant(Ui_FeedbackAssistant):
+class Assistant(Ui_FeedbackAssistant, MainWindow):
     TABLE_TYPE_NAME_MAPPING = {
         1: "作业完成",
         2: "课内表现",
         3: "日后改进"
     }
 
-    def __init__(self, window, db=DB):
+    def __init__(self, db=DB):
         super().__init__()
-        self.setupUi(window)
+        self.setupUi(self)
 
         self.TABLE_TYPE_OBJECT_MAPPING = {
             1: self.table_hw,
@@ -36,10 +37,9 @@ class Assistant(Ui_FeedbackAssistant):
         # signals
         for tid, obj in self.TABLE_TYPE_OBJECT_MAPPING.items():
             obj.itemChanged.connect(self.change_content(tid, obj))
-        self.table_hw.clicked.connect(self.clear_selection([self.table_ipv, self.table_pfm]))
-        self.table_pfm.clicked.connect(self.clear_selection([self.table_hw, self.table_ipv]))
-        self.table_ipv.clicked.connect(self.clear_selection([self.table_hw, self.table_pfm]))
-        self.button_append.clicked.connect(self.append_text)
+        self.table_hw.itemClicked.connect(self.append_text([self.table_ipv, self.table_pfm]))
+        self.table_pfm.itemClicked.connect(self.append_text([self.table_hw, self.table_ipv]))
+        self.table_ipv.itemClicked.connect(self.append_text([self.table_hw, self.table_pfm]))
         self.button_undo.clicked.connect(self.display.undo)
         self.button_redo.clicked.connect(self.display.redo)
         self.button_delete.clicked.connect(self.delete_content)
@@ -48,6 +48,10 @@ class Assistant(Ui_FeedbackAssistant):
         self.display.textChanged.connect(self.clear_copied_label)
         self.button_append_redo.clicked.connect(self.appendStack.redo)
         self.button_append_undo.clicked.connect(self.appendStack.undo)
+        self.button_clear.clicked.connect(self.clear_text)
+
+        self.tabBar = self.content.tabBar()
+        self.tabBar.installEventFilter(self)
 
     def init_db(self, db=DB):
         self.conn = sqlite3.connect(db)
@@ -97,7 +101,7 @@ class Assistant(Ui_FeedbackAssistant):
             for index, row in enumerate(rows):
                 item = QTableWidgetItem(row["content"])
                 table_obj.setItem(index, 0, item)
-                item.setToolTip(row["content"])
+                item.setToolTip("Append text \"{}\"".format(row["content"]))
                 self.item_mapping[table_id].append(row["id"])
 
     def change_content(self, tid, obj):
@@ -116,20 +120,30 @@ class Assistant(Ui_FeedbackAssistant):
                 return table_id, selected[0]
         return None, None
 
-    def append_text(self):
+    def append_all_text(self):
         _, item = self.get_selected_item()
         if item:
             text = item.text()
             self.display.setText(self.display.toPlainText() + text)
 
-            command = displayTextChangedCommand(self.display, self.appendStack)
+            command = DisplayTextChangedCommand(self.display, self.appendStack)
             self.appendStack.push(command)
-            print(self.appendStack.index())
 
-    def clear_selection(self, objects):
-        def callback():
-            for obj in objects:
+    def clear_text(self):
+        self.display.setText("")
+        command = DisplayTextChangedCommand(self.display, self.appendStack)
+        self.appendStack.push(command)
+
+    def append_text(self, clear_tables):
+        def callback(item):
+            for obj in clear_tables:
                 obj.clearSelection()
+
+            text = item.text()
+            self.display.setText(self.display.toPlainText() + text)
+            command = DisplayTextChangedCommand(self.display, self.appendStack)
+            self.appendStack.push(command)
+
         return callback
 
     def delete_content(self):
@@ -165,6 +179,16 @@ class Assistant(Ui_FeedbackAssistant):
         if self.label_copy.text():
             self.label_copy.setText("")
 
+    def eventFilter(self, obj, event):
+        if obj == self.tabBar:
+            if event.type() == QEvent.HoverMove:
+                index = self.tabBar.tabAt(event.pos())
+                self.content.setCurrentIndex(index)
+                return True
+            else:
+                return QTabBar.eventFilter(self, obj, event)
+        return  QMainWindow.eventFilter(self, obj, event)
+
 
 class AddFeedback(Ui_Add):
     INDEX_TABLE_MAPPING = {
@@ -196,32 +220,12 @@ class AddFeedback(Ui_Add):
             table.setItem(0, 0, QTableWidgetItem(content))
 
 
-class displayTextChangedCommand(QUndoCommand):
-    def __init__(self, display, stack):
-        super().__init__()
-        self.display = display
-        self.stack = stack
-        self.display_text = self.display.toPlainText()
-
-    def undo(self):
-        index = self.stack.index()
-        pre_command = self.stack.command(index - 2)
-        if pre_command:
-            self.display.setText(pre_command.display_text)
-        else:
-            self.display.setText("")
-
-    def redo(self):
-        self.display.setText(self.display_text)
-
-
 def now():
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = QMainWindow()
-    assistant = Assistant(window)
-    window.show()
+    assistant = Assistant()
+    assistant.show()
     sys.exit(app.exec_())
